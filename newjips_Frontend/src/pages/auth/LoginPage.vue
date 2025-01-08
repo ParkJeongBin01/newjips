@@ -55,6 +55,13 @@ const closemodal = () => {
   ismodalvisit.value = false;
   console.log('모달 닫힘');
 };
+
+const openidentity = ref(true);
+
+const toggleidentity = () => {
+  openidentity.value = !openidentity.value;
+};
+console.log('본인인증 창 열림 : ', openidentity.value);
 </script>
 
 <template>
@@ -186,14 +193,92 @@ const closemodal = () => {
                 </button>
                 <div class="modal" v-if="ismodalvisit">
                   <div class="modal-title">
-                    <div class="id" v-show="ismodalvisit === 1">
-                      아이디 찾기
+                    <div class="mb-4" style="font-size: xx-large">
+                      <span style="padding: 0 3%"> 아이디 찾기 </span>
+                      <button
+                        class="id"
+                        type="button"
+                        style="border-style: none; background-color: white"
+                        v-show="ismodalvisit === 1"
+                      >
+                        비밀번호 찾기
+                      </button>
                     </div>
-                    <div class="pw" v-show="ismodalvisit === 2">
-                      비밀번호 찾기
+                    <!-- 본인인증 버튼 -->
+                    <div
+                      class="findidentity"
+                      style="
+                        border-style: solid;
+                        border-width: 1px;
+                        border-color: gray;
+                        border-radius: 2%;
+                      "
+                    >
+                      <button
+                        class="findidentitybutton mb-2 mt-2"
+                        type="button"
+                        style="
+                          padding: 0 3%;
+                          border-style: none;
+                          background-color: white;
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          width: 100%;
+                        "
+                        @click="toggleidentity"
+                      >
+                        <span style="font-weight: bold">
+                          본인인증으로 찾기
+                        </span>
+                        <span> {{ openidentity ? '∨' : '∧' }} </span>
+                      </button>
+                      <div v-if="openidentity" class="toggle mb-2">
+                        <div
+                          style="
+                            border-style: solid;
+                            border-width: 1px;
+                            border-color: gray;
+                            border-radius: 5%;
+                            max-width: 28%;
+                            display: flex;
+                            justify-content: center;
+                            /* 수평 가운데 정렬 */
+                            text-align: center;
+                            /* 텍스트 가운데 정렬 */
+                            margin: 0 3%;
+                            /*좌우 이동*/
+                            flex-wrap: wrap;
+                          "
+                        >
+                          <img
+                            class="mt-2"
+                            src="@\assets\images\identity verification.png"
+                          />
+                          <p>휴대폰 본인인증</p>
+                        </div>
+                        <p class="mt-2" style="color: gray; margin-left: 2%">
+                          *본인명의 휴대폰이 아닌 경우, 인증이 불가합니다.
+                        </p>
+                      </div>
                     </div>
 
-                    <button @click="closemodal">닫기</button>
+                    <button
+                      class="pw"
+                      type="button"
+                      style="border-style: none; background-color: white"
+                      v-show="ismodalvisit === 2"
+                    >
+                      아이디 찾기 비밀번호 찾기
+                    </button>
+                    <div class="closebutton mt-5">
+                      <button
+                        @click="closemodal"
+                        style="border-style: none; background-color: white"
+                      >
+                        닫기
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -224,8 +309,6 @@ const closemodal = () => {
 .modal {
   position: fixed;
   z-index: 9999;
-  left: 0;
-  top: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
@@ -235,9 +318,10 @@ const closemodal = () => {
 }
 .modal-title {
   background: white;
-  padding: 20px;
+  padding: 3%;
   border-radius: 10px;
-  width: 300px;
-  margin: 20% auto;
+  width: 28%;
+  height: 50%;
+  margin: 10% auto;
 }
 </style>

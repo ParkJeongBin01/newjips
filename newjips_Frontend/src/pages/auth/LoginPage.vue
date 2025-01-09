@@ -12,6 +12,7 @@ const auth = useAuthStore();
 const member = reactive({
   userId: '',
   password: '',
+  username: '',
 });
 
 const error = ref('');
@@ -44,6 +45,7 @@ const togglePasswordVisibility = () => {
   passwordHidden.value = !passwordHidden.value;
 };
 
+// 모달
 const ismodalvisit = ref(0);
 console.log('모달 : ', ismodalvisit.value);
 const openmodal = (index) => {
@@ -56,12 +58,27 @@ const closemodal = () => {
   console.log('모달 닫힘');
 };
 
-const openidentity = ref(true);
+// 모달 외부 클릭 시 닫기
+const closeModalOutside = (event) => {
+  if (event.target.classList.contains('modal')) {
+    closemodal();
+  }
+};
 
+// 본인인증 창
+const openidentity = ref(true);
 const toggleidentity = () => {
   openidentity.value = !openidentity.value;
+  openemail.value = false;
 };
 console.log('본인인증 창 열림 : ', openidentity.value);
+
+// 이메일 창
+const openemail = ref(false);
+const toggleemail = () => {
+  openemail.value = !openemail.value;
+  openidentity.value = false;
+};
 </script>
 
 <template>
@@ -191,8 +208,12 @@ console.log('본인인증 창 열림 : ', openidentity.value);
                 >
                   비밀번호 찾기
                 </button>
-                <div class="modal" v-if="ismodalvisit">
-                  <div class="modal-title">
+                <div
+                  class="modal"
+                  v-if="ismodalvisit"
+                  @click="closeModalOutside"
+                >
+                  <div class="modal-title" @click.stop>
                     <div class="mb-4" style="font-size: xx-large">
                       <span style="padding: 0 3%"> 아이디 찾기 </span>
                       <button
@@ -204,7 +225,8 @@ console.log('본인인증 창 열림 : ', openidentity.value);
                         비밀번호 찾기
                       </button>
                     </div>
-                    <!-- 본인인증 버튼 -->
+
+                    <!-- 본인인증 옵션 -->
                     <div
                       class="findidentity"
                       style="
@@ -233,7 +255,7 @@ console.log('본인인증 창 열림 : ', openidentity.value);
                         </span>
                         <span> {{ openidentity ? '∨' : '∧' }} </span>
                       </button>
-                      <div v-if="openidentity" class="toggle mb-2">
+                      <div v-if="openidentity" class="inidentity mb-2">
                         <div
                           style="
                             border-style: solid;
@@ -263,6 +285,81 @@ console.log('본인인증 창 열림 : ', openidentity.value);
                       </div>
                     </div>
 
+                    <!-- 이메일 옵션 -->
+                    <div
+                      class="findemail mt-2"
+                      style="
+                        border-style: solid;
+                        border-width: 1px;
+                        border-color: gray;
+                        border-radius: 2%;
+                      "
+                    >
+                      <button
+                        class="findemailbutton mt-2 mb-2"
+                        type="button"
+                        style="
+                          padding: 0 3%;
+                          border-style: none;
+                          background-color: white;
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          width: 100%;
+                        "
+                        @click="toggleemail"
+                      >
+                        <span style="font-weight: bold"> 이메일로 찾기</span>
+                        <span> {{ openemail ? '∨' : '∧' }} </span>
+                      </button>
+                      <div v-if="openemail" class="inemail">
+                        <div class="namewindow mt-3" style="padding: 0 3%">
+                          이름
+                        </div>
+                        <div class="input-container mt-2" style="padding: 0 2%">
+                          <label class="nemelabel" for="name"></label>
+                          <input
+                            class="name-control"
+                            type="text"
+                            style="box-shadow: none"
+                            id="name"
+                            v-model="member.username"
+                            placeholder="이름을 입력하세요"
+                          />
+                        </div>
+                        <div class="emaillabel mt-3" style="padding: 0 3%">
+                          이메일
+                        </div>
+                        <div
+                          class="input-container mt-2 mb-3"
+                          style="padding: 0 2%"
+                        >
+                          <label class="emaillabel" for="email"></label>
+                          <input
+                            class="email-control"
+                            type="text"
+                            style="box-shadow: none"
+                            id="email"
+                            v-model="member.userId"
+                            placeholder="이메일을 입력하세요"
+                          />
+                        </div>
+                        <button
+                          class="check mb-3"
+                          type="submit"
+                          style="
+                            padding: 0 5%;
+                            margin: 0 3%;
+                            width: 70%;
+                            border: 1px solid gray;
+                            background-color: gainsboro;
+                          "
+                        >
+                          확인
+                        </button>
+                      </div>
+                    </div>
+
                     <button
                       class="pw"
                       type="button"
@@ -271,14 +368,6 @@ console.log('본인인증 창 열림 : ', openidentity.value);
                     >
                       아이디 찾기 비밀번호 찾기
                     </button>
-                    <div class="closebutton mt-5">
-                      <button
-                        @click="closemodal"
-                        style="border-style: none; background-color: white"
-                      >
-                        닫기
-                      </button>
-                    </div>
                   </div>
                 </div>
 
@@ -320,8 +409,8 @@ console.log('본인인증 창 열림 : ', openidentity.value);
   background: white;
   padding: 3%;
   border-radius: 10px;
-  width: 28%;
-  height: 50%;
+  width: 30%;
+  height: 68%;
   margin: 10% auto;
 }
 </style>

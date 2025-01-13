@@ -47,7 +47,7 @@ public class MemberController {
 
     @PostMapping("")
     public ResponseEntity<Member> join(MemberDTO memberDTO,
-                                       @RequestParam(name = "avatar", required = false) MultipartFile avatar) throws IllegalAccessException {
+                                       @RequestParam(name = "profilePicUrl", required = false) String profilePicUrl) throws IllegalAccessException {
         try {
             Member member = memberDTO.toMember();
 
@@ -63,12 +63,8 @@ public class MemberController {
             }
 
             member.setProfilePic("/avatar/unknown.png"); // 기본 이미지
-            if (avatar != null && !avatar.isEmpty()) {
-                // 업로드된 이미지 처리 로직
-                // 예: member.setProfilePic("/avatar/" + savedImageName);
-            }
 
-            Member createdMember = service.join(member, avatar);
+            Member createdMember = service.join(member, null);
             return ResponseEntity.status(201).body(createdMember);
         } catch (IllegalAccessException e) {
             log.error("회원 가입 중 오류 발생: {}", e.getMessage());
@@ -86,8 +82,8 @@ public class MemberController {
 
     @PutMapping("")
     public ResponseEntity<Member> changeProfile(MemberDTO memberDTO,
-                @RequestParam(name = "avatar", required = false) MultipartFile avatar) throws IllegalAccessException {
+                @RequestParam(name = "profilePicUrl", required = false) String profilePicUrl) throws IllegalAccessException {
         Member member = memberDTO.toMember();
-        return ResponseEntity.ok(service.update(member, avatar));
+        return ResponseEntity.ok(service.update(member, profilePicUrl));
     }
 }

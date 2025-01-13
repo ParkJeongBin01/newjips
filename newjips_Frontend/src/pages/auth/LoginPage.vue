@@ -23,7 +23,6 @@ const auth = useAuthStore();
 const member = reactive({
   userId: '',
   password: '',
-  username: '',
 });
 
 const error = ref('');

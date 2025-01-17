@@ -17,6 +17,7 @@ import formRoutes from './buddizForm'; // Import BuddizForm-related routes
 import aiChatPage from '@/pages/ai/AiChatPage.vue'; // Import AiChatPage component
 import estateRoutes from './estate'; // Import Estate-related routes
 import NotFoundRoutes from './404NotFound'; // Import 404 NotFound routes
+import Certification from './certification';
 
 // Create the router instance with history mode and routes
 const router = createRouter({
@@ -74,6 +75,7 @@ const router = createRouter({
     ...formRoutes, // Include BuddizForm-related routes
     ...estateRoutes, // Include estate-related routes
     ...NotFoundRoutes, // Include 404 NotFound page for undefined routes
+    ...Certification,
   ],
   scrollBehavior(to, from, savedPosition) {
     return { top: 0 };

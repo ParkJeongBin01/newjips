@@ -1,5 +1,7 @@
 # 뉴집스
 
+![main page](https://github.com/ParkJeongBin01/newjips/blob/main/newjips_Frontend/src/assets/README/main.JPG)
+
 - - -
 - 명령어는 git bash에서 실행
 

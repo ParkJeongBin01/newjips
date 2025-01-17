@@ -4,6 +4,16 @@ import { useAuthStore } from '@/stores/auth';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import Modal from '@/components/modal.vue';
+import Certification from '../certification/Certification.vue';
+
+// 아이디 찾기 및 비밀번호 찾기 함수
+const findId = () => {
+  router.push({ name: 'Certification', params: { type: 'findId' } });
+};
+
+const findPassword = () => {
+  router.push({ name: 'Certification', params: { type: 'findPassword' } });
+};
 
 const ismodalvisit = ref(0);
 
@@ -156,31 +166,31 @@ const togglePasswordVisibility = () => {
                 </div>
 
                 <!-- 아이디 | 비밀번호 찾기 -->
-                <button
+                <router-link
+                  to="/auth/login/certification"
                   class="findid"
-                  type="button"
-                  @click="openmodal(1)"
                   style="
                     color: gray;
                     border-style: none;
+                    text-decoration: none;
                     background-color: white;
                   "
                 >
                   아이디 찾기
-                </button>
+                </router-link>
                 <span style="color: gray">&vert;</span>
-                <button
+                <router-link
+                  to="/auth/login/certification"
                   class="findpw"
-                  type="button"
-                  @click="openmodal(2)"
                   style="
                     color: gray;
                     border-style: none;
+                    text-decoration: none;
                     background-color: white;
                   "
                 >
                   비밀번호 찾기
-                </button>
+                </router-link>
                 <!-- 로그인 버튼 -->
                 <button
                   class="btn-orange btn-lg w-100 mt-4 mb-4"

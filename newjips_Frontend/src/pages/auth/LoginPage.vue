@@ -3,27 +3,6 @@ import { computed, reactive, ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import Modal from '@/components/modal.vue';
-import Certification from '../certification/Certification.vue';
-
-// 아이디 찾기 및 비밀번호 찾기 함수
-const findId = () => {
-  router.push({ name: 'Certification', params: { type: 'findId' } });
-};
-
-const findPassword = () => {
-  router.push({ name: 'Certification', params: { type: 'findPassword' } });
-};
-
-const ismodalvisit = ref(0);
-
-const openmodal = (index) => {
-  ismodalvisit.value = index;
-};
-
-const closemodal = () => {
-  ismodalvisit.value = 0;
-};
 
 const { t, locale } = useI18n();
 const route = useRoute();
@@ -210,7 +189,6 @@ const togglePasswordVisibility = () => {
           </div>
         </div>
       </div>
-      <Modal :ismodalvisit="ismodalvisit" @closemodal="closemodal" />
     </main>
   </body>
 </template>

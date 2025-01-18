@@ -40,12 +40,22 @@ const toggleemail = () => {
     <div class="container">
       <div class="card">
         <div class="selectoption">
-          <button @click="selectOption('id')">아이디 찾기</button>
-          <button @click="selectOption('password')">비밀번호 찾기</button>
+          <button
+            :class="['idbutton', { active_borderid: isFindingId }]"
+            @click="selectOption('id')"
+          >
+            아이디 찾기
+          </button>
+          <button
+            :class="['pwbutton', { active_borderpw: isFindingPassword }]"
+            @click="selectOption('password')"
+          >
+            비밀번호 찾기
+          </button>
         </div>
         <div v-if="isFindingId">
           <!-- 본인인증 옵션 -->
-          <div :class="['findidentity', { inactive: !openidentity }]">
+          <div class="findidentity">
             <button
               :class="['findidentitybutton', { inactive: !openidentity }]"
               type="button"
@@ -69,7 +79,7 @@ const toggleemail = () => {
           </div>
 
           <!-- 이메일 옵션 -->
-          <div :class="['findemail', { inactive: !openemail }]">
+          <div class="findemail">
             <button
               :class="['findemailbutton', { inactive: !openemail }]"
               type="button"
@@ -108,7 +118,7 @@ const toggleemail = () => {
 
         <div v-if="isFindingPassword">
           <!-- 본인인증 옵션 -->
-          <div :class="['findidentity', { inactive: !openidentity }]">
+          <div class="findidentity">
             <button
               :class="['findidentitybutton', { inactive: !openidentity }]"
               type="button"
@@ -143,7 +153,7 @@ const toggleemail = () => {
           </div>
 
           <!-- 이메일 옵션 -->
-          <div :class="['findemail', { inactive: !openemail }]">
+          <div class="findemail">
             <button
               :class="['findemailbutton', { inactive: !openemail }]"
               type="button"
@@ -203,25 +213,66 @@ const toggleemail = () => {
   font-size: x-large;
   margin-bottom: 2%;
 }
-.selectoption button {
-  border-style: none;
+/* 아이디 찾기 버튼 */
+.idbutton {
+  border: 2px solid gray;
+  border-radius: 8px 8px 0 0;
   background-color: white;
 }
+/* 비밀번호 찾기 버튼 */
+.pwbutton {
+  border: 2px solid gray;
+  border-radius: 8px 8px 0 0;
+  background-color: white;
+}
+/* 아이디 찾기 활성화시 */
+.active_borderid {
+  color: #ff8f17;
+  border-top: 2px solid #ff8f17;
+  border-right: 2px solid #ff8f17;
+  border-bottom: 0;
+  border-left: 2px solid #ff8f17;
+  border-radius: 8px 8px 0 0;
+}
+/* 비밀번호 찾기 활성화시 */
+.active_borderpw {
+  color: #ff8f17;
+  border-top: 2px solid #ff8f17;
+  border-right: 2px solid #ff8f17;
+  border-bottom: 0;
+  border-left: 2px solid #ff8f17;
+  border-radius: 8px 8px 0 0;
+}
+/* 아이디 찾기 활성화 시 비밀번호 찾기 버튼 변경 */
+.active_borderid + .pwbutton {
+  border-bottom: 2px solid #ff8f17;
+  border-left: 0;
+  border-radius: 8px 8px 0 0;
+}
+/* 비밀번호 찾기 활성화 시 아이디 찾기 버튼 변경 */
+/* 인접 형제 선택자: + 선택자는 특정 요소의 바로 다음 형제 요소에만 적용됩니다. */
+/* 즉, active_borderpw가 적용된 버튼이 idbutton보다 앞에 있을 때만 적용됩니다. */
+/* 그래서 html을 유지 시키고 스타일만 바꾸기 어려웠다.... */
+/* :not() 선택자를 사용해 활성 상태가 아닌 버튼을 명시적으로 스타일링해줬다... */
+.idbutton:not(.active_borderid) {
+  border-right: 0;
+  border-bottom: 2px solid #ff8f17;
+  border-radius: 8px 8px 0 0;
+}
+
 /* 본인인증 옵션 */
 .findidentity {
   border: 1px solid gray;
-  border-radius: 2%;
+  border-radius: 2px;
 }
 .findidentitybutton {
-  padding: 0 3%;
+  padding: 2% 3%;
   border-style: none;
   background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 2%;
-  margin-bottom: 2%;
 }
 .inidentity {
   margin-bottom: 2%;
@@ -235,12 +286,14 @@ const toggleemail = () => {
 }
 .id-control {
   padding: 2%;
-  border-radius: 3%;
   margin-bottom: 2%;
+}
+.id-control::placeholder {
+  font-size: medium;
 }
 .identity-phon {
   border: 1px solid gray;
-  border-radius: 5%;
+  border-radius: 5px;
   width: 20%;
   max-width: 28%;
   display: flex;
@@ -257,19 +310,17 @@ const toggleemail = () => {
 /* 이메일 옵션 */
 .findemail {
   border: 1px solid gray;
-  border-radius: 2%;
+  border-radius: 2px;
   margin-top: 2%;
 }
 .findemailbutton {
-  padding: 0 3%;
+  padding: 2% 3%;
   border-style: none;
   background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 2%;
-  margin-bottom: 2%;
 }
 .namewindow {
   margin-top: 3%;

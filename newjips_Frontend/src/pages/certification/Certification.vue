@@ -196,31 +196,32 @@ const toggleemail = () => {
 
 <style scope>
 .container {
-  max-width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   padding: 5% 0;
 }
 .card {
-  width: 35%;
+  width: 40%;
   max-height: 100%;
   padding: 20px;
   height: 55vh;
 }
 .selectoption {
-  display: flex;
-  justify-content: center;
   font-size: x-large;
   margin-bottom: 2%;
 }
+
 /* 아이디 찾기 버튼 */
 .idbutton {
+  width: 50%;
   border: 2px solid gray;
   border-radius: 8px 8px 0 0;
   background-color: white;
 }
 /* 비밀번호 찾기 버튼 */
 .pwbutton {
+  width: 50%;
   border: 2px solid gray;
   border-radius: 8px 8px 0 0;
   background-color: white;
@@ -285,7 +286,7 @@ const toggleemail = () => {
   padding: 0 2%;
 }
 .id-control {
-  padding: 2%;
+  padding: 1%;
   margin-bottom: 2%;
 }
 .id-control::placeholder {
@@ -331,16 +332,24 @@ const toggleemail = () => {
   padding: 0 2%;
 }
 .name-control {
+  padding: 1%;
   margin-top: -1%;
   box-shadow: none;
+}
+.name-control::placeholder {
+  font-size: medium;
 }
 .emaillabel {
   margin-top: 3%;
   padding: 0 3%;
 }
 .email-control {
+  padding: 1%;
   margin-top: -1%;
   box-shadow: none;
+}
+.email-control::placeholder {
+  font-size: medium;
 }
 .check {
   margin: 3% 0 3% 2%; /* 상 우 하 좌 */
@@ -351,5 +360,18 @@ const toggleemail = () => {
 }
 .inactive {
   background-color: lightgray;
+}
+/* 작은 화면에서 카드 너비를 80%로 조정 */
+@media (max-width: 768px) {
+  .card {
+    width: 80%;
+  }
+}
+
+/* 모바일 화면에서 카드 너비를 100%로 조정 */
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+  }
 }
 </style>

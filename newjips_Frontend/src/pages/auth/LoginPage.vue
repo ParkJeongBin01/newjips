@@ -53,7 +53,7 @@ const togglePasswordVisibility = () => {
         class="container-fluid d-flex h-100 align-item-center justify-content-center py-4"
       >
         <!-- style="max-width: 100%; height: 100vh;" > 이러면 화면 길어짐;;;; -->
-        <div class="card card-body" style="max-width: 70%; max-height: 600px">
+        <div class="card card-body" style="max-width: 70%; height: 600px">
           <a
             class="position-absolute top-1 end-0 nav-link fs-sm py-1 px-2 me-3"
             href="#"

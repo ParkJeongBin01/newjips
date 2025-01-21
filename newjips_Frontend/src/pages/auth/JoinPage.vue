@@ -32,7 +32,9 @@ const checkId = async () => {
 
   disableSubmit.value = await authApi.checkId(member.userId);
   console.log(disableSubmit.value, typeof disableSubmit.value);
-  checkError.value = disableSubmit.value ? t('common.join.notid') : t('common.join.useid');
+  checkError.value = disableSubmit.value
+    ? t('common.join.notid')
+    : t('common.join.useid');
 };
 
 const changeId = () => {
@@ -70,16 +72,30 @@ const join = async () => {
   <!-- 배경색 -->
   <body class="bg-light">
     <main class="page-wrapper d-flex flex-column" style="min-height: 100vh">
-      <div class="container-fluid d-flex h-100 align-items-center justify-content-center py-4">
+      <div
+        class="container-fluid d-flex h-100 align-items-center justify-content-center py-4"
+      >
         <!-- style="max-width: 100%; height: 100vh;" > 이러면 화면 길어짐;;;; -->
-        <div class="card card-body" style="max-width: 70%; max-height: 600px">
-          <a class="position-absolute top-1 end-0 nav-link fs-sm py-1 px-2 me-3" href="#" onclick="window.history.go(-1); return false;">
+        <div class="card card-body" style="max-width: 70%; height: 600px">
+          <a
+            class="position-absolute top-1 end-0 nav-link fs-sm py-1 px-2 me-3"
+            href="#"
+            onclick="window.history.go(-1); return false;"
+          >
             <i class="fa-solid fa-arrow-left fs-base me-2"></i>Go back</a
           >
           <!-- 양쪽 화면 -->
           <div class="row mx-0 align-item-center">
             <!-- 왼쪽화면 -->
-            <div class="col-md-6 border-end-md p-sm-1" style="display: flex; flex-direction: column; align-items: center; margin-top: 3%">
+            <div
+              class="col-md-6 border-end-md p-sm-1"
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 3%;
+              "
+            >
               <h3 class="h3 mb-4 mb-sm-5">
                 {{ t('common.join.newjips1') }}<br />
                 {{ t('common.join.newjips2') }}
@@ -103,7 +119,10 @@ const join = async () => {
                 </li>
               </ul>
 
-              <img src="@/assets/images/joinimg.png" style="height: 100%; max-height: 40%" />
+              <img
+                src="@/assets/images/joinimg.png"
+                style="height: 100%; max-height: 40%"
+              />
             </div>
 
             <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ오른쪽 화면ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
@@ -111,39 +130,114 @@ const join = async () => {
             <div class="col-md-6 px-2 pt-2 pb-2 px-sm-2 pb-sm-5 pt-md-5">
               <form class="needs-validation" @submit.prevent="join" novalidate>
                 <div class="mb-2">
-                  <label class="form-label" for="name">{{ t('common.join.name') }}</label>
-                  <input class="form-control" type="text" id="name" v-model="member.name" :placeholder="t('common.join.namein')" required />
+                  <label class="form-label" for="name">{{
+                    t('common.join.name')
+                  }}</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="name"
+                    v-model="member.name"
+                    :placeholder="t('common.join.namein')"
+                    required
+                  />
                 </div>
                 <div class="mb-2">
                   <label class="form-label" for="text"
                     >{{ t('common.join.id') }}
-                    <button type="button" class="btn btn-success btn-sm py-0 me-2" @click="checkId">{{ t('common.join.overid2') }}</button>
-                    <span :class="disableSubmit.value ? 'text-primary' : 'text-danger'">{{ checkError }}</span>
+                    <button
+                      type="button"
+                      class="btn btn-success btn-sm py-0 me-2"
+                      @click="checkId"
+                    >
+                      {{ t('common.join.overid2') }}
+                    </button>
+                    <span
+                      :class="
+                        disableSubmit.value ? 'text-primary' : 'text-danger'
+                      "
+                      >{{ checkError }}</span
+                    >
                   </label>
-                  <input class="form-control" type="text" id="text" @input="changeId" v-model="member.userId" :placeholder="t('common.join.idin')" required />
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="text"
+                    @input="changeId"
+                    v-model="member.userId"
+                    :placeholder="t('common.join.idin')"
+                    required
+                  />
                 </div>
                 <div class="mb-2">
-                  <label class="form-label" for="password">{{ t('common.join.password') }}</label>
-                  <input class="form-control" type="password" id="password" v-model="member.password" required />
+                  <label class="form-label" for="password">{{
+                    t('common.join.password')
+                  }}</label>
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="password"
+                    v-model="member.password"
+                    required
+                  />
                 </div>
                 <div class="mb-2">
-                  <label class="form-label" for="password2">{{ t('common.join.checkpassword') }}</label>
-                  <input class="form-control" type="password" id="password2" v-model="member.password2" required />
+                  <label class="form-label" for="password2">{{
+                    t('common.join.checkpassword')
+                  }}</label>
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="password2"
+                    v-model="member.password2"
+                    required
+                  />
                 </div>
                 <div class="mb-2">
-                  <label class="form-label" for="nickname">{{ t('common.join.nickname') }}</label>
-                  <input class="form-control" type="text" id="nickname" v-model="member.nickname" :placeholder="t('common.join.nicknamein')" required />
+                  <label class="form-label" for="nickname">{{
+                    t('common.join.nickname')
+                  }}</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="nickname"
+                    v-model="member.nickname"
+                    :placeholder="t('common.join.nicknamein')"
+                    required
+                  />
                 </div>
                 <div class="mb-4">
-                  <label class="form-label">{{ t('common.join.gender') }}</label>
+                  <label class="form-label">{{
+                    t('common.join.gender')
+                  }}</label>
                   <div>
-                    <input type="radio" id="male" value="M" v-model="member.gender" required />
-                    <label for="male" class="me-3">{{ t('common.join.man') }}</label>
-                    <input type="radio" id="female" value="F" v-model="member.gender" required />
+                    <input
+                      type="radio"
+                      id="male"
+                      value="M"
+                      v-model="member.gender"
+                      required
+                    />
+                    <label for="male" class="me-3">{{
+                      t('common.join.man')
+                    }}</label>
+                    <input
+                      type="radio"
+                      id="female"
+                      value="F"
+                      v-model="member.gender"
+                      required
+                    />
                     <label for="female">{{ t('common.join.woman') }}</label>
                   </div>
                 </div>
-                <button class="btn-orange btn-lg w-100" type="submit" :disabled="disableSubmit">Sign up</button>
+                <button
+                  class="btn-orange btn-lg w-100"
+                  type="submit"
+                  :disabled="disableSubmit"
+                >
+                  Sign up
+                </button>
               </form>
             </div>
           </div>

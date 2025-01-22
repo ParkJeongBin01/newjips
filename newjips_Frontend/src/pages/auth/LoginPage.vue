@@ -146,7 +146,7 @@ const togglePasswordVisibility = () => {
 
                 <!-- 아이디 | 비밀번호 찾기 -->
                 <router-link
-                  to="/auth/login/certification"
+                  to="/auth/login/certification?mode=id"
                   class="findid"
                   style="
                     color: gray;
@@ -159,7 +159,7 @@ const togglePasswordVisibility = () => {
                 </router-link>
                 <span style="color: gray">&vert;</span>
                 <router-link
-                  to="/auth/login/certification"
+                  to="/auth/login/certification?mode=password"
                   class="findpw"
                   style="
                     color: gray;

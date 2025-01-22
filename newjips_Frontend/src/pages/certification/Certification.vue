@@ -1,20 +1,30 @@
 <script setup>
 import { ref, reactive } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const router = useRouter();
+const route = useRoute();
+
+// 상태 변수
+const isFindingId = ref(route.query.mode === 'id' || !route.query.mode); // 기본값: 아이디 찾기
+console.log('id : ', isFindingId.value);
+const isFindingPassword = ref(route.query.mode === 'password');
+console.log('password : ', isFindingPassword.value);
 
 const find = reactive({
   username: '',
   userId: '',
 });
 
-//상태 변수
-const isFindingId = ref(true);
-const isFindingPassword = ref(false);
-
+//mode를 자주 바꿨을 시 뒤로 가기도 계속 해줘야 하기에
+//replace로 브라우저 히스토리에 기록을 남기지 않고 '/auth/login'로 바로 가게 해줌.
 const selectOption = (option) => {
   if (option === 'id') {
+    router.replace({ query: { mode: 'id' } });
     isFindingId.value = true;
     isFindingPassword.value = false;
   } else if (option === 'password') {
+    router.replace({ query: { mode: 'password' } });
     isFindingId.value = false;
     isFindingPassword.value = true;
   }

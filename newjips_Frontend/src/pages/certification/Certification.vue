@@ -1,12 +1,12 @@
 <script setup>
 import { ref, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
+// import { useAuthStore } from '@/stores/auth';
 import authApi from '@/api/authApi';
 
 const router = useRouter();
 const route = useRoute();
-const auth = useAuthStore();
+// const auth = useAuthStore();
 
 // 상태 변수
 const isFindingId = ref(route.query.mode === 'id' || !route.query.mode); // 기본값: 아이디 찾기

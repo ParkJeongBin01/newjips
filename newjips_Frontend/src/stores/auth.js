@@ -93,17 +93,17 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.setItem('auth', JSON.stringify(state.value));
   };
 
-  const getpassword = async (userId, name) => {
-    try {
-      const { data } = await axios.get(
-        `/api/member/password/${userId}/${name}`
-      );
-      return data;
-    } catch (error) {
-      console.error('비밀번호 찾기 오류 : ', error);
-      throw error; //에러를 다시 던져서 호출하는 쪽에서 처리
-    }
-  };
+  // const getpassword = async (userId, name) => {
+  //   try {
+  //     const { data } = await axios.get(
+  //       `/api/member/password/${userId}/${name}`
+  //     );
+  //     return data;
+  //   } catch (error) {
+  //     console.error('비밀번호 찾기 오류 : ', error);
+  //     throw error; //에러를 다시 던져서 호출하는 쪽에서 처리
+  //   }
+  // };
 
   load();
 
@@ -127,6 +127,6 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logout,
     getToken,
-    getpassword,
+    // getpassword,
   };
 });

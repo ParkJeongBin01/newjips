@@ -39,6 +39,12 @@ public class MemberController {
         return ResponseEntity.ok(member);
     }
 
+    @GetMapping("/password/{userId}/{name}")
+    public ResponseEntity<Member> getPassword(@PathVariable String userId, @PathVariable String name){
+        Member member = service.getPassword(userId, name);
+        return ResponseEntity.ok(member);
+    }
+
     @GetMapping("/buddiz/{uno}")
     public ResponseEntity<Boolean> get(@PathVariable long uno){
         boolean member = service.isBuddiz(uno);

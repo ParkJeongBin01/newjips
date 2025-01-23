@@ -47,6 +47,12 @@
     WHERE u.userId = #{userId}
     </select>
 
+    <select id="selectByPassword" resultType="com.kb.member.dto.Member" parameterType="map">
+        SELECT uno, userId, password, name, nickname, gender, profilePic
+        FROM User u
+        WHERE u.userId = #{userId} AND u.name = #{name}
+    </select>
+
     <insert id="insertMember" parameterType="com.kb.member.dto.Member">
         INSERT INTO User(userId, password, name, nickname, gender, profilePic)
         VALUES(#{userId}, #{password}, #{name}, #{nickname}, #{gender} ,#{profilePic})

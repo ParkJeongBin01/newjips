@@ -63,6 +63,11 @@ public class MemberService{
                         .orElseThrow(NoSuchElementException::new);
     }
 
+    public Member getPassword(String userId,String name){
+        return Optional.ofNullable(mapper.selectByPassword(userId, name))
+                .orElseThrow(NoSuchElementException::new);
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public Member join(Member member, MultipartFile avatar) throws IllegalAccessException {
         if(member.checkRequiredValue()){

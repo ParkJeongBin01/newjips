@@ -27,6 +27,13 @@ export default {
     return data;
   },
 
+  ///////////////  회원 password 찾기   ////////////////////////
+  async getpassword(userId, name) {
+    const { data } = await api.get(`${BASE_URL}/password/${userId}/${name}`);
+    console.log('AUTH GET PASSWORD,USERID', data);
+    return data.password;
+  },
+
   ///////////////// 회원 정보 가입 //////////////////////////
   async create(member) {
     const formData = new FormData();

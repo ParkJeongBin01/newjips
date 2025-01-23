@@ -37,6 +37,7 @@ export const useAuthStore = defineStore('auth', () => {
   const gender = computed(() => state.value.gender);
   const avatar = computed(() => state.value.avatar);
   const profilePic = computed(() => state.value.profilePic);
+  const password = computed(() => state.value.password);
 
   const load = () => {
     const auth = localStorage.getItem('auth');
@@ -92,6 +93,18 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.setItem('auth', JSON.stringify(state.value));
   };
 
+  const getpassword = async (userId, name) => {
+    try {
+      const { data } = await axios.get(
+        `/api/member/password/${userId}/${name}`
+      );
+      return data;
+    } catch (error) {
+      console.error('비밀번호 찾기 오류 : ', error);
+      throw error; //에러를 다시 던져서 호출하는 쪽에서 처리
+    }
+  };
+
   load();
 
   // 토큰을 가져오고, 사용자의 이메일을 업데이트하며, 초기 상태를 불러오는 기능을 수행
@@ -106,6 +119,7 @@ export const useAuthStore = defineStore('auth', () => {
     name,
     nickname,
     profilePic,
+    password,
     gender,
     avatar,
     isLogin,
@@ -113,5 +127,6 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logout,
     getToken,
+    getpassword,
   };
 });

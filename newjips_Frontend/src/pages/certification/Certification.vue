@@ -34,6 +34,20 @@ const find = reactive({
 //   }
 // };
 
+const getid = async () => {
+  console.log(find);
+  try {
+    const response = await authApi.getid(find.userId, find.name);
+    console.log('비밀번호 찾기 결과: ', response);
+    // 비밀번호를 사용자에게 보여주는 로직
+    alert(`이메일: ${response}`);
+  } catch (error) {
+    console.error('비밀번호 찾기 오류: ', error);
+    // userId나 name이 틀린 경우 경고 메시지
+    alert('아이디 또는 이름이 틀렸습니다. 다시 확인해 주세요.');
+  }
+};
+
 const getpassword = async () => {
   console.log(find);
   try {
@@ -121,7 +135,7 @@ const toggleemail = () => {
           </div>
 
           <!-- 이메일 옵션 -->
-          <form class="findemail" @submit.prevent="getpassword">
+          <form class="findemail" @submit.prevent="getid">
             <button
               :class="['findemailbutton', { inactive: !openemail }]"
               type="button"

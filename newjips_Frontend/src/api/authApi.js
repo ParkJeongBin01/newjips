@@ -34,6 +34,13 @@ export default {
     return data.password;
   },
 
+  ///////////////  회원 id 찾기   ////////////////////////
+  async getid(userId, name) {
+    const { data } = await api.get(`${BASE_URL}/password/${userId}/${name}`);
+    console.log('AUTH GET PASSWORD,USERID', data);
+    return data.userId;
+  },
+
   ///////////////// 회원 정보 가입 //////////////////////////
   async create(member) {
     const formData = new FormData();

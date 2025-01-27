@@ -75,6 +75,13 @@
         WHERE uno = #{uno}
     </update>
 
+    <update id="uupdatePassword" parameterType="com.kb.member.dto.Member">
+        UPDATE User
+        SET
+        password = #{password}
+        WHERE userId = #{userId}
+    </update>
+
 
     <delete id="deleteAuth"  parameterType="com.kb.member.dto.Auth">
         DELETE FROM  member_auth

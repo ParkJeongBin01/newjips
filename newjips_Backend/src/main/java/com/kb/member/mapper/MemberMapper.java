@@ -15,6 +15,7 @@ public interface MemberMapper {
     int insertMember(Member member); //회원 추가
     int updateMember(Member member); //회원 정보 업데이트
     int updatePassword(Member member); //비밀번호 업데이트
+    int uupdatePassword(Member member); //비밀번호 업데이트
     int deleteAuth(Auth auth); //인증 삭제
     Long findBuddiz(long uno);
 }

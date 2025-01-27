@@ -1,12 +1,12 @@
 <script setup>
 import { ref, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-// import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/auth';
 import authApi from '@/api/authApi';
 
 const router = useRouter();
 const route = useRoute();
-// const auth = useAuthStore();
+const auth = useAuthStore();
 
 // 상태 변수
 const isFindingId = ref(route.query.mode === 'id' || !route.query.mode); // 기본값: 아이디 찾기
@@ -48,13 +48,29 @@ const getid = async () => {
   }
 };
 
-const getpassword = async () => {
+// const getpassword = async () => {
+//   console.log(find);
+//   try {
+//     const response = await authApi.getpassword(find.userId, find.name);
+//     console.log('비밀번호 찾기 결과: ', response);
+//     // 비밀번호를 사용자에게 보여주는 로직
+//     router.push({ name: 'passwordchage' });
+//     // alert(`비밀번호: ${response}`);
+//   } catch (error) {
+//     console.error('비밀번호 찾기 오류: ', error);
+//     // userId나 name이 틀린 경우 경고 메시지
+//     alert('아이디 또는 이름이 틀렸습니다. 다시 확인해 주세요.');
+//   }
+// };
+
+const getauth = async () => {
   console.log(find);
   try {
-    const response = await authApi.getpassword(find.userId, find.name);
+    const response = await authApi.getauth(find.userId, find.name);
     console.log('비밀번호 찾기 결과: ', response);
     // 비밀번호를 사용자에게 보여주는 로직
-    alert(`비밀번호: ${response}`);
+    router.push({ name: 'passwordchage' });
+    // alert(`비밀번호: ${response}`);
   } catch (error) {
     console.error('비밀번호 찾기 오류: ', error);
     // userId나 name이 틀린 경우 경고 메시지
@@ -209,7 +225,7 @@ const toggleemail = () => {
           </div>
 
           <!-- 이메일 옵션 -->
-          <form class="findemail" @submit.prevent="getpassword">
+          <form class="findemail" @submit.prevent="getauth">
             <button
               :class="['findemailbutton', { inactive: !openemail }]"
               type="button"

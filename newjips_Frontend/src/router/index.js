@@ -18,6 +18,7 @@ import aiChatPage from '@/pages/ai/AiChatPage.vue'; // Import AiChatPage compone
 import estateRoutes from './estate'; // Import Estate-related routes
 import NotFoundRoutes from './404NotFound'; // Import 404 NotFound routes
 import Certification from './certification';
+import Passwordchage from './passwordchage';
 
 // Create the router instance with history mode and routes
 const router = createRouter({
@@ -76,6 +77,7 @@ const router = createRouter({
     ...estateRoutes, // Include estate-related routes
     ...NotFoundRoutes, // Include 404 NotFound page for undefined routes
     ...Certification,
+    ...Passwordchage,
   ],
   scrollBehavior(to, from, savedPosition) {
     return { top: 0 };

@@ -2,6 +2,7 @@ package com.kb.member.controller;
 
 import com.kb.common.util.UploadFiles;
 import com.kb.member.dto.ChangePasswordDTO;
+import com.kb.member.dto.UpdatePasswordDTO;
 import com.kb.member.dto.Member;
 import com.kb.member.dto.MemberDTO;
 import com.kb.member.service.MemberService;
@@ -83,6 +84,12 @@ public class MemberController {
     @PutMapping("/changepassword")
     public ResponseEntity<?> changePassword(ChangePasswordDTO changePassword) {
         service.changePassword(changePassword);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/updatepassword")
+    public ResponseEntity<?> updatePassword(UpdatePasswordDTO updatePassword){
+        service.updatePassword(updatePassword);
         return ResponseEntity.ok().build();
     }
 

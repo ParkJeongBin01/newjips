@@ -2,6 +2,7 @@ package com.kb.member.service;
 
 import com.kb.member.dto.Auth;
 import com.kb.member.dto.ChangePasswordDTO;
+import com.kb.member.dto.UpdatePasswordDTO;
 import com.kb.util.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -130,10 +131,30 @@ public class MemberService{
               throw new PasswordMissmatchException();
         }
 
+
         member.setPassword(passwordEncoder.encode(changePassword.getNewPassword()));
         int result = mapper.updatePassword(member);
         if(result != 1){
             throw new NoSuchElementException();
+        }
+    }
+
+    public void updatePassword(UpdatePasswordDTO updatePassword){
+        try {
+            Member member = mapper.selectById(updatePassword.getUserId());
+            if (member != null) {
+                member.setPassword(passwordEncoder.encode(updatePassword.getNewPassword()));
+                int result = mapper.uupdatePassword(member);
+                if (result != 1) {
+                    throw new NoSuchElementException("비밀번호 업데이트에 실패했습니다.");
+                }
+            } else {
+                throw new NoSuchElementException("사용자를 찾을 수 없습니다.");
+            }
+        } catch (Exception e) {
+            // 예외를 로그로 남기고, 적절한 응답을 반환합니다.
+            e.printStackTrace();
+            throw new RuntimeException("비밀번호 업데이트 중 오류가 발생했습니다.");
         }
     }
 }

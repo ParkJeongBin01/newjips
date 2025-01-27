@@ -97,7 +97,8 @@ const onFileChange = (event) => {
     avatar.value = file;
   } else {
     console.log('API 호출 중 오류 발생:', e); // 에러 로그 추가
-    error.value = e.response?.data?.message || '알 수 없는 오류가 발생했습니다.'; // 에러 메시지 개선
+    error.value =
+      e.response?.data?.message || '알 수 없는 오류가 발생했습니다.'; // 에러 메시지 개선
   }
 };
 </script>
@@ -124,10 +125,29 @@ const onFileChange = (event) => {
                   <span class="text-danger">*</span>
                 </label>
                 <div class="d-flex align-items-start mb-3">
-                  <label class="mt-3 ms-5" for="uploadfile" title="Replace this pic" style="cursor: pointer; display: flex; align-items: center; justify-content: center">
+                  <label
+                    class="mt-3 ms-5"
+                    for="uploadfile"
+                    title="Replace this pic"
+                    style="
+                      cursor: pointer;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
                     <!-- Avatar place holder -->
                     <div style="position: relative; display: inline-block">
-                      <img class="avatar-img" :src="profilePic" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%" />
+                      <img
+                        class="avatar-img"
+                        :src="profilePic"
+                        style="
+                          width: 100px;
+                          height: 100px;
+                          object-fit: cover;
+                          border-radius: 50%;
+                        "
+                      />
                       <div
                         style="
                           position: absolute;
@@ -147,7 +167,13 @@ const onFileChange = (event) => {
                   </label>
                   <!-- 업로드 버튼 -->
                   <!-- <label class="btn btn-sm mb-0 ms-0 mt-3" for="uploadfile" style="border: 1px solid; margin-left: -100px; cursor: pointer">수정</label> -->
-                  <input type="file" id="uploadfile" style="display: none" accept="image/*" @change="onFileChange" />
+                  <input
+                    type="file"
+                    id="uploadfile"
+                    style="display: none"
+                    accept="image/*"
+                    @change="onFileChange"
+                  />
                 </div>
               </div>
 
@@ -164,13 +190,25 @@ const onFileChange = (event) => {
                   type="text"
                   :placeholder="t('common.edit.nicknameHolder')"
                   v-model="member.nickname"
-                  style="border: 2px solid #eaecef; border-radius: 3px; padding: 2%"
+                  style="
+                    border: 2px solid #eaecef;
+                    border-radius: 3px;
+                    padding: 2%;
+                  "
                 />
               </div>
 
               <!-- 수정하기 버튼 -->
               <div class="col-12 text-end">
-                <button class="btn mb-1 me-3" style="border: 1px solid #ff8f17; max-height: 100%; background-color: #ff8f17; color: white">
+                <button
+                  class="btn mb-1 me-3"
+                  style="
+                    border: 1px solid #ff8f17;
+                    max-height: 100%;
+                    background-color: #ff8f17;
+                    color: white;
+                  "
+                >
                   {{ t('common.edit.edit') }}
                 </button>
               </div>
@@ -189,19 +227,47 @@ const onFileChange = (event) => {
           <div class="card-body">
             <div class="mb-3">
               <label class="form-label">{{ t('common.edit.oldPw') }}</label>
-              <input class="form-control" v-model="oldPw" type="password" :placeholder="t('common.edit.oldPwHolder')" />
+              <input
+                class="form-control"
+                v-model="oldPw"
+                type="password"
+                :placeholder="t('common.edit.oldPwHolder')"
+              />
             </div>
             <div class="mb-3">
               <label class="form-label">{{ t('common.edit.newPw') }}</label>
-              <input class="form-control" v-model="newPw1" type="password" :placeholder="t('common.edit.newPwHolder')" @change="newPwMatch()" />
+              <input
+                class="form-control"
+                v-model="newPw1"
+                type="password"
+                :placeholder="t('common.edit.newPwHolder')"
+                @change="newPwMatch()"
+              />
             </div>
             <div class="mb-3">
               <label class="form-label">{{ t('common.edit.checkPw') }}</label>
-              <input class="form-control" v-model="newPw2" type="password" :placeholder="t('common.edit.checkPwHolder')" @change="newPwMatch()" />
-              <span v-if="!iscorrect" class="ms-2" style="color: red">{{ t('common.edit.notpw') }}</span>
+              <input
+                class="form-control"
+                v-model="newPw2"
+                type="password"
+                :placeholder="t('common.edit.checkPwHolder')"
+                @change="newPwMatch()"
+              />
+              <span v-if="!iscorrect" class="ms-2" style="color: red">{{
+                t('common.edit.notpw')
+              }}</span>
             </div>
             <div class="col-12 text-end">
-              <button @click="onChangePw()" class="btn mb-1 me-3" style="border: 1px solid #ff8f17; max-height: 100%; background-color: #ff8f17; color: white">
+              <button
+                @click="onChangePw()"
+                class="btn mb-1 me-3"
+                style="
+                  border: 1px solid #ff8f17;
+                  max-height: 100%;
+                  background-color: #ff8f17;
+                  color: white;
+                "
+              >
                 {{ t('common.edit.edit') }}
               </button>
             </div>

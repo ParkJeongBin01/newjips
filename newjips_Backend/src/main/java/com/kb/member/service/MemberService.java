@@ -65,8 +65,18 @@ public class MemberService{
     }
 
     public Member getPassword(String userId,String name){
-        return Optional.ofNullable(mapper.selectByPassword(userId, name))
+        return Optional.ofNullable(mapper.selectBypassword(userId, name))
                 .orElseThrow(NoSuchElementException::new);
+    }
+
+    public String findUserId(String name, String password){
+        Member member = Optional.ofNullable(mapper.selectByPassword(name))
+                .orElseThrow(NoSuchElementException::new);
+        // 비밀번호 확인
+        if (!passwordEncoder.matches(password, member.getPassword())) {
+            throw new PasswordMissmatchException(); // 비밀번호가 일치하지 않는 경우
+        }
+        return member.getUserId(); // 비밀번호가 일치하면 userId 반환
     }
 
     @Transactional(rollbackFor = Exception.class)

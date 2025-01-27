@@ -35,10 +35,12 @@ export default {
   // },
 
   ///////////////  회원 id 찾기   ////////////////////////
-  async getid(userId, name) {
-    const { data } = await api.get(`${BASE_URL}/password/${userId}/${name}`);
+  async findUserId(name, password) {
+    const { data } = await api.get(`${BASE_URL}/find/userId`, {
+      params: { name, password }, // URL에 매개변수 추가
+    });
     console.log('AUTH GET PASSWORD,USERID', data);
-    return data.userId;
+    return data;
   },
 
   ///////////////  userId, name 가져오기   ////////////////////////

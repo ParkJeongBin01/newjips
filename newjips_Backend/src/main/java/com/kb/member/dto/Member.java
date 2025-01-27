@@ -82,4 +82,10 @@ public class Member implements UserDetails {
         }
     }
 
+    public String findUserId(String name, String password) {
+        // 이 메서드는 서비스에서 호출될 것이므로 여기서는 구현하지 않습니다.
+        return null;
+    }
+
+
 }

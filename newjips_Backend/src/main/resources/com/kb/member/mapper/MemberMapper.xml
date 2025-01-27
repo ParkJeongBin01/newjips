@@ -50,6 +50,12 @@
     <select id="selectByPassword" resultType="com.kb.member.dto.Member" parameterType="map">
         SELECT uno, userId, password, name, nickname, gender, profilePic
         FROM User u
+        WHERE u.name = #{name}
+    </select>
+
+    <select id="selectBypassword" resultType="com.kb.member.dto.Member" parameterType="map">
+        SELECT uno, userId, password, name, nickname, gender, profilePic
+        FROM User u
         WHERE u.userId = #{userId} AND u.name = #{name}
     </select>
 

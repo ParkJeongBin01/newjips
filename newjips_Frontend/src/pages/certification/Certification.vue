@@ -14,7 +14,12 @@ console.log('id : ', isFindingId.value);
 const isFindingPassword = ref(route.query.mode === 'password');
 console.log('password : ', isFindingPassword.value);
 
-const find = reactive({
+const id = reactive({
+  name: '',
+  password: '',
+});
+
+const password = reactive({
   userId: '',
   name: '',
 });
@@ -34,10 +39,10 @@ const find = reactive({
 //   }
 // };
 
-const getid = async () => {
-  console.log(find);
+const findUserId = async () => {
+  console.log(id);
   try {
-    const response = await authApi.getid(find.userId, find.name);
+    const response = await authApi.findUserId(id.name, id.password);
     console.log('비밀번호 찾기 결과: ', response);
     // 비밀번호를 사용자에게 보여주는 로직
     alert(`이메일: ${response}`);
@@ -66,7 +71,7 @@ const getid = async () => {
 const getauth = async () => {
   console.log(find);
   try {
-    const response = await authApi.getauth(find.userId, find.name);
+    const response = await authApi.getauth(password.userId, password.name);
     console.log('비밀번호 찾기 결과: ', response);
     // 비밀번호를 사용자에게 보여주는 로직
     router.push({ name: 'passwordchage' });
@@ -151,7 +156,7 @@ const toggleemail = () => {
           </div>
 
           <!-- 이메일 옵션 -->
-          <form class="findemail" @submit.prevent="getid">
+          <form class="findemail" @submit.prevent="findUserId">
             <button
               :class="['findemailbutton', { inactive: !openemail }]"
               type="button"
@@ -168,19 +173,19 @@ const toggleemail = () => {
                   class="name-control"
                   type="text"
                   id="name"
-                  v-model="find.name"
+                  v-model="id.name"
                   placeholder="이름을 입력하세요"
                 />
               </div>
-              <div class="emaillabel">이메일</div>
+              <div class="emaillabel">비밀번호</div>
               <div class="input-container">
                 <label class="emaillabellabel" for="email"></label>
                 <input
                   class="email-control"
                   type="text"
                   id="email"
-                  v-model="find.userId"
-                  placeholder="이메일을 입력하세요"
+                  v-model="id.password"
+                  placeholder="비밀번호를 입력하세요"
                 />
               </div>
               <button class="check" type="submit">확인</button>
@@ -207,7 +212,7 @@ const toggleemail = () => {
                   class="id-control"
                   type="text"
                   id="id"
-                  v-model="find.userId"
+                  v-model="password.userId"
                   placeholder="아이디를 입력하세요."
                 />
               </div>
@@ -242,7 +247,7 @@ const toggleemail = () => {
                   class="name-control"
                   type="text"
                   id="name"
-                  v-model="find.name"
+                  v-model="password.name"
                   placeholder="이름을 입력하세요"
                 />
               </div>
@@ -253,7 +258,7 @@ const toggleemail = () => {
                   class="email-control"
                   type="text"
                   id="email"
-                  v-model="find.userId"
+                  v-model="password.userId"
                   placeholder="이메일을 입력하세요"
                 />
               </div>

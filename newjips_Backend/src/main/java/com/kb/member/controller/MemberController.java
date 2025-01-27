@@ -46,6 +46,13 @@ public class MemberController {
         return ResponseEntity.ok(member);
     }
 
+    @GetMapping("/find/userId")
+    public ResponseEntity<String> findUserId(@RequestParam String name, @RequestParam String password){
+        String userId = service.findUserId(name,password);
+        return ResponseEntity.ok(userId);
+    }
+
+
     @GetMapping("/buddiz/{uno}")
     public ResponseEntity<Boolean> get(@PathVariable long uno){
         boolean member = service.isBuddiz(uno);

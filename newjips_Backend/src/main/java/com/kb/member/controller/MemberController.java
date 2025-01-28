@@ -52,6 +52,11 @@ public class MemberController {
         return ResponseEntity.ok(userId);
     }
 
+    @PutMapping("/update/Password")
+    public ResponseEntity<?> updatePassword(UpdatePasswordDTO updatePassword){
+        service.updatePassword(updatePassword);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/buddiz/{uno}")
     public ResponseEntity<Boolean> get(@PathVariable long uno){
@@ -94,11 +99,6 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/updatepassword")
-    public ResponseEntity<?> updatePassword(UpdatePasswordDTO updatePassword){
-        service.updatePassword(updatePassword);
-        return ResponseEntity.ok().build();
-    }
 
     @PutMapping("")
     public ResponseEntity<Member> changeProfile(MemberDTO memberDTO,

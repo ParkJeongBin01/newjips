@@ -10,8 +10,8 @@ const confirmPassword = ref('');
 const router = useRouter();
 
 const member = reactive({
-  userId: '',
-  password: '',
+  userId: auth.userId,
+  newPassword: '',
 });
 
 const updatepassword = async () => {
@@ -19,19 +19,22 @@ const updatepassword = async () => {
     alert('비밀번호가 같지 않습니다.');
     return;
   }
+  // userId 확인
+  console.log('현재 member.userId:', member.userId);
 
   //비밀번호 변경 API 호출
   try {
     const formData = new FormData();
     formData.append('newPassword', newPassword.value);
     formData.append('userId', member.userId); // userId 추가
-    console.log('Form Data:', formData);
+    console.log('Form Data:', Array.from(formData.entries())); // FormData의 내용을 배열로 출력
 
-    const response = await authApi.updatepassword(formData);
+    const response = await authApi.updatePassword(formData);
     console.log('비밀번호 변경 결과: ', response);
 
     alert('비밀번호가 성공적으로 변경되었습니다!');
     newPassword.value = '';
+    confirmPassword.value = '';
     router.push({ name: 'login' }); // 페이지 이동 설정
   } catch (error) {
     console.error('비밀번호 변경 오류: ', error);

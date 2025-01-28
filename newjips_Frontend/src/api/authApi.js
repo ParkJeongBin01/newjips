@@ -43,17 +43,17 @@ export default {
     return data;
   },
 
+  ///////////////  회원 password 찾기 및 변경   ////////////////////////
+  async updatePassword(formData) {
+    const { data } = await api.put(`${BASE_URL}/update/Password`, formData);
+    return data;
+  },
+
   ///////////////  userId, name 가져오기   ////////////////////////
   async getauth(userId, name) {
     const { data } = await api.get(`${BASE_URL}/password/${userId}/${name}`);
     console.log('AUTH GET PASSWORD,USERID', data);
     return data;
-  },
-
-  ///////////////  새 비밀번호로 변경하기   ////////////////////////
-  async updatepassword(data) {
-    const response = await api.put(`${BASE_URL}/updatepassword`, data);
-    return response.data;
   },
 
   ///////////////// 회원 정보 가입 //////////////////////////

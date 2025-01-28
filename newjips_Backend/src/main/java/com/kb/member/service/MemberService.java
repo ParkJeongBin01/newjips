@@ -79,6 +79,29 @@ public class MemberService{
         return member.getUserId(); // 비밀번호가 일치하면 userId 반환
     }
 
+    public void updatePassword(UpdatePasswordDTO updatePassword){
+        String userId = updatePassword.getUserId();
+        System.out.println("User ID: " + userId); // 추가된 로그
+        Member member = mapper.selectById(updatePassword.getUserId());
+
+        if (member == null) {
+            System.out.println("사용자 ID: " + updatePassword.getUserId() + "에 대한 회원 정보를 찾을 수 없습니다.");
+        }
+        //사용자 userId 확인
+        if(member != null ){
+            // 사용자가 존재할 경우, 새로운 비밀번호 설정
+            String encodedPassword = passwordEncoder.encode(updatePassword.getNewPassword()); // 비밀번호 암호화
+            member.setPassword(encodedPassword);
+
+            int result = mapper.uupdatePassword(member); //비밀번호 업데이트 쿼리 호출
+            if(result != 1){
+                throw new RuntimeException("비밀번호 업데이트에 실패했습니다.");
+            }
+        } else{
+            throw new RuntimeException("사용자 정보를 찾을 수 없습니다.");
+        }
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public Member join(Member member, MultipartFile avatar) throws IllegalAccessException {
         if(member.checkRequiredValue()){
@@ -146,25 +169,6 @@ public class MemberService{
         int result = mapper.updatePassword(member);
         if(result != 1){
             throw new NoSuchElementException();
-        }
-    }
-
-    public void updatePassword(UpdatePasswordDTO updatePassword){
-        try {
-            Member member = mapper.selectById(updatePassword.getUserId());
-            if (member != null) {
-                member.setPassword(passwordEncoder.encode(updatePassword.getNewPassword()));
-                int result = mapper.uupdatePassword(member);
-                if (result != 1) {
-                    throw new NoSuchElementException("비밀번호 업데이트에 실패했습니다.");
-                }
-            } else {
-                throw new NoSuchElementException("사용자를 찾을 수 없습니다.");
-            }
-        } catch (Exception e) {
-            // 예외를 로그로 남기고, 적절한 응답을 반환합니다.
-            e.printStackTrace();
-            throw new RuntimeException("비밀번호 업데이트 중 오류가 발생했습니다.");
         }
     }
 }

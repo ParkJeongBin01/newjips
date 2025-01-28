@@ -23,7 +23,7 @@ public class Member implements UserDetails {
     private String nickname;    // 닉네임
     private String gender;      // 성별
     private String status = "Y"; 		// 활성화 여부, Y, N
-    private String email;       // 이메일
+//    private String email;       // 이메일
     private String profilePic;  // 아바타이미지
     private Date createDate;    // 생성일
     private Date modifyDate;    // 수정일

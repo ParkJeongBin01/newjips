@@ -24,21 +24,6 @@ const password = reactive({
   name: '',
 });
 
-//password 찾는 로직
-// const password = async () => {
-//   console.log(find);
-//   try {
-//     const response = await auth.getpassword(find.userId, find.name);
-//     console.log('비밀번호 찾기 결과: ', response);
-//     // 비밀번호를 보여주는 로직
-//     alert(`비밀번호: ${response.password}`);
-//   } catch (error) {
-//     console.error('비밀번호 찾기 오류: ', error);
-//     // userId나 name이 틀린 경우 경고 메시지
-//     alert('아이디 또는 이름이 틀렸습니다. 다시 확인해 주세요.');
-//   }
-// };
-
 const findUserId = async () => {
   console.log(id);
   try {
@@ -53,26 +38,12 @@ const findUserId = async () => {
   }
 };
 
-// const getpassword = async () => {
-//   console.log(find);
-//   try {
-//     const response = await authApi.getpassword(find.userId, find.name);
-//     console.log('비밀번호 찾기 결과: ', response);
-//     // 비밀번호를 사용자에게 보여주는 로직
-//     router.push({ name: 'passwordchage' });
-//     // alert(`비밀번호: ${response}`);
-//   } catch (error) {
-//     console.error('비밀번호 찾기 오류: ', error);
-//     // userId나 name이 틀린 경우 경고 메시지
-//     alert('아이디 또는 이름이 틀렸습니다. 다시 확인해 주세요.');
-//   }
-// };
-
 const getauth = async () => {
-  console.log(find);
+  console.log(password);
   try {
     const response = await authApi.getauth(password.userId, password.name);
     console.log('비밀번호 찾기 결과: ', response);
+
     // 비밀번호를 사용자에게 보여주는 로직
     router.push({ name: 'passwordchage' });
     // alert(`비밀번호: ${response}`);
